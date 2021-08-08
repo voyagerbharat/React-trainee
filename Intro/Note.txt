@@ -1,0 +1,16 @@
+Note
+Hey!
+
+Prettier sometimes struggle to recognize JavaScript and React. To help Prettier, you have to:
+
+
+Open settings.json (press CTRL + P in vscode, type ">settings", select "Preferences: Open Settings JSON")
+Add to the config:
+
+"editor.formatOnSave": true,
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"[javascript]": {
+"editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+
+After that Prettier will magically work as expected ;)
