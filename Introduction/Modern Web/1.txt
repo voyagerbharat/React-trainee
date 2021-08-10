@@ -1,0 +1,19 @@
+Single Page Application - Twitter uses React
+Everything comes in Js and at first time it recieves some markup and  bundles which have js logics in it ,
+so first time it may take time , then it doesn't take time to switch between 
+page containers(not refreshed)
+
+Server Side Rendering - Traditional way
+Page is refreshed when we clicks on new tab
+when we inspect we can see all markup , 
+because server sends all markup to your browser when you acess new page
+
+
+
+We could altho make a hybrid of SPA and SSR website - but it is more complex
+
+SSR could have staic or dynamic Rendering
+
+In static - we have written specific content for our page
+but in dynamic - we have skeleton or template for out content , content may be dynamically loaded and changed
+from time into these skeleton or template.

@@ -1,0 +1,30 @@
+Server
+Server is basically a computer that responds to the request it recieves
+
+Backend is the code the automatically sends the data depending upon the type
+of requests it recieves
+
+API sends the data from database.It is basically a interface a middleman.
+
+Api mostly sends data in form of Json.
+
+Json is data file , JavaScript object Notation
+
+we have two types of server api's -Rest Api(CRUD)
+                                   GraphQl(Muatations)
+
+
+
+Rest Api -sends all data irrespective of you want or Not
+
+ex /users
+   /profile
+   /posts/1
+
+   if i just want post tittle i cant get it using rest api ,
+   i will get all data of what that api sends me like - title ,id ,body etc.
+
+types of request are get request , post request
+
+
+GraphQl- in GraphQl we only recieves fields that we ask for.More fast and flexible
