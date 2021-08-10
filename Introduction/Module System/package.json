@@ -1,0 +1,17 @@
+{
+  "name": "module-system",
+  "version": "1.0.0",
+  "description": "ok",
+  "main": "another.js",
+  "scripts": {
+    "s": "node file.js"
+  },
+  "keywords": [
+    "lol"
+  ],
+  "author": "Bharat",
+  "license": "ISC",
+  "dependencies": {
+    "minify": "^7.0.2"
+  }
+}
