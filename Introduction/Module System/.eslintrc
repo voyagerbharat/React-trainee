@@ -1,0 +1,7 @@
+{
+  "extends": ["prettier"],
+  "rules": {
+    "no-unused-vars": "warn"
+  },
+  "parserOptions": { "ecmaVersion": 2021 }
+}

@@ -4,7 +4,9 @@
   "description": "ok",
   "main": "another.js",
   "scripts": {
-    "s": "node file.js"
+    "s": "node file.js",
+    "prettier": "prettier --write *.js",
+    "lint": "eslint *.js"
   },
   "keywords": [
     "lol"
@@ -13,5 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "minify": "^7.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "2.3.2"
   }
 }

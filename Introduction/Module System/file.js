@@ -1,3 +1,3 @@
-const variable = require("./another.js");
-const minify = require("minify");
-console.log(variable);
+const variable = require('./another.js')
+const minify = require('minify')
+console.log(variable)
