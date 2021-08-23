@@ -29,7 +29,7 @@ const person = {
   hobby: "music prod",
 };
 const { ne, age: be, hobby } = person;
-console.log(be, hobby);
+console.log(ne, hobby);
 
 //arrray destruct
 
@@ -41,3 +41,14 @@ function ello({ name }, [el, bel, cel]) {
   console.log(name, el);
 }
 ello(person, arr);
+
+//rest operator
+
+const { name, hobby: hb, ...rest } = person;
+console.log(hb);
+
+const [fa, ...rest1] = arr1;
+console.log(rest1);
+
+const extt = { ...person, hobbi: "chesz" };
+console.log(extt);
