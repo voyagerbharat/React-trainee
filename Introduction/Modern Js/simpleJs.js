@@ -52,3 +52,42 @@ console.log(rest1);
 
 const extt = { ...person, hobbi: "chesz" };
 console.log(extt);
+
+// async and sync , promise
+
+setTimeout(() => {
+  console.log("after syncs");
+}, 0);
+
+//promise - then and catch
+const mypromise = (val) => {
+  return new Promise((resolve, reject) => {
+    if (val > 5) {
+      resolve("yes it is");
+    } else {
+      reject("it coudnt make it ");
+    }
+  });
+};
+mypromise(1)
+  .then((val) => {
+    console.log("did it make it :", val);
+  })
+  .catch((val) => {
+    console.log("sorry to say:", val);
+  });
+
+//new async syntax
+
+async function exec() {
+  try {
+    const val = await mypromise(1);
+    console.log("inside exec :", val);
+  } catch (val) {
+    console.log("error :", val);
+  }
+}
+
+console.log("sync sync");
+
+exec();
