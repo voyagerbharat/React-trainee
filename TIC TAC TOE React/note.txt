@@ -1,0 +1,18 @@
+ @@ note before 2nd video of tictactoe intro section
+
+ Note
+Note
+An important note here!
+
+In the next video, we finally start to develop an app. The tool that will power the project is going to be Parcel. The template that we install is called nano-react-app. The template adds the latest and unstable version of Parcel which is bad because it is the latest alpha version. So in the next video right after running npx nano-react-app folderName please do the following to avoid having errors:
+
+Open package.json
+Find "parcel": "^2.0.0-alpha.3.2" (or whatever version you have) under devDependencies
+Edit the line so it looks like that: "parcel": "1.12.4"
+Also in package.json add new resolutions section below "scripts" section: "scripts": { // ... }, "resolutions": { "@babel/preset-env": "7.13.8" },
+Also in package.json add one more script fix-parcel to "scripts": "scripts": { "fix-parcel": "npx npm-force-resolutions && npm i && npm i", // ... }
+In the terminal (git-bash, bash, MacOS), run one after another: rm -rf node_modules package-lock.json npm install npm run fix-parcel
+That's it.
+
+
+@@ 
