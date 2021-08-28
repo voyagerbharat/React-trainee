@@ -1,9 +1,10 @@
 import React from 'react';
 import Board from './component/Board';
+import './styles/root.scss';
 
 export default () => (
-  <div>
-    <h1>Welcome to React Parcel Micro App!</h1>
+  <div className="app">
+    <h1>TicTacToe!</h1>
     <Board />
   </div>
 );

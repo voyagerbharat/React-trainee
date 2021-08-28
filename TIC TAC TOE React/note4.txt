@@ -1,0 +1,20 @@
+Hi there!
+
+
+In the next video about styles if you encounter a problem with CSS not being applied, please don't panic and continue watching the video to the middle part (~4:50). From 4:50 we will upgrade Parcel and CSS will work as expected.
+
+Below is the explanation of why this happens. Thank you and keep it up! :)
+
+---------------------------
+Styles are not loaded with alpha version of Parcel which is ^2.0.0-alpha.3.2.
+The problem here lies exactly in the Parcel version and fellow dependencies.
+When we installed the nano-react template, it automatically added Parcel with the latest version available to package.json, which at the moment of writing this is ^2.0.0-alpha.3.2 (or higher).
+Well, unfortunately, this template installs the latest, but not stable version. This is why it's happening.
+
+Text version how to resolve this (we do this in the video starting from 4:50):
+1) Open package.json
+2) Find "parcel": "^2.0.0-alpha.3.2" (or whatever version you have)
+3) Replace it with "parcel": "1.12.4" and save the file
+4) Run "npm install" in terminal
+
+Above steps will downgrade installed parcel version to 1.12.4 which is stable. Moreover, when you will run "npm run start", it must also automatically install you another dependency -> "@babel/core": "^7.11.4" (or higher). Please check package.json after you run "npm run start". If it won't install you @babel/core automatically, then just add it to your dependency list manually in package.json and then run "npm install".
