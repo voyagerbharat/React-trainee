@@ -1,0 +1,66 @@
+Note
+Hi,
+
+ 
+
+Please read the following so that you are not confused in the upcoming videos!
+
+ 
+
+There were new changes introduced to Create-React-App template (used in Box-Office and Chat-app):
+
+Web Vitals-CRA now comes with web-vitals support. Web Vitals is a set of optional tools to measure performance in the app. These metrics can be then used by you (e.g. via analytics or simple console.log). WE WILL NOT COVER WEB VITALS IN THE VIDEOS. PLEASE COMMENT IT OUT.
+PWA and service-worker customization- This one is related to creating a PWA with a service-worker supplied by CRA. What is PWA and how to deal with PWA is covered at the end of the Box-Office project but it's important to prepare for it in advance.
+In the videos, when scaffolding a project, the command we use is npx create-react-app box-office --use-npm With new CRA version, this command will not include a service-worker file that is used to create a PWA.
+
+So the mentioned command must be modified and should look like this:
+
+npx create-react-app box-office --template cra-template-pwa --use-npm
+
+Using the modified command, CRA will include:
+
+service-worker.js - service worker script itself
+
+serviceWorkerRegistration.js - a script that loads the service worker into the app
+
+In the videos, serviceWorker.js is the same as new serviceWorkerRegistration.js. So again, just use:
+
+npx create-react-app box-office --template cra-template-pwa --use-npm
+
+ 
+
+More info: Vist this page.
+
+ 
+
+To avoid having ESLint errors please add the following line at the very top in serviceWorkerRegistration.js:
+
+/* eslint-disable */ 
+
+For those who have already scaffolded a project but don't have service worker files:
+
+Go to https://github.com/cra-template/pwa/tree/master/packages/cra-template-pwa/template/src
+Copy service-worker.js and serviceWorkerRegistration.js files to /src folder in your project.
+Inside index.js add the next: import * as serviceWorkerRegistration from './serviceWorkerRegistration'; ... serviceWorkerRegistration.register();
+Inside serviceWorkerRegistration.js at the very top add to disable ESLint in this file: /* eslint-disable */
+ 
+
+If you need more info, please follow: https://create-react-app.dev/docs/measuring-performance/
+
+ 
+
+The web constantly changes and we want to keep you up-to-date.
+
+Thank you!
+
+
+
+Note
+A real quickie here!
+
+If you see "Failed to compile." and then a set of errors coming from service worker files - these are ESLint errors.
+
+
+Service worker files must be skipped by ESLint. Please add the next line as a very first line at the top to all service files:
+
+/* eslint-disable */

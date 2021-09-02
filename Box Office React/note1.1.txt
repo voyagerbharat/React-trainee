@@ -1,0 +1,13 @@
+Note
+Hi,
+
+Just another quick note here!
+
+In case you experience any errors or warnings sourcing from ESLint while you did everything like in the videos, feel free to edit and play with different ESLint rules in the .eslintrc file.
+
+For example, ESLint can easily produce a warning about console.log.
+
+To disable the warning, you can either:
+
+Modify .eslintrc by adding a new rule "no-console": [0] 
+Add a comment line right before console.log // eslint-disable-next-line no-console
