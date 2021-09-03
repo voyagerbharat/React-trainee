@@ -8,14 +8,14 @@ function App() {
   // we define various route pages inside switch and in each route page we add components we want to show in that route
   return (
     <div>
-      <switch>
+      <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/best">
           <Starred />
         </Route>
-      </switch>
+      </Switch>
     </div>
   );
 }
