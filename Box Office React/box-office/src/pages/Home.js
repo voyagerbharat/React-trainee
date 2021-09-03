@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import MainPageLayout from '../Components/MainPageLayout';
+import { apiGet } from '../misc/config';
 
 const Home = () => {
   const [ip, setInput] = useState('');
+  const [results, setResults] = useState(null);
 
   const onInputChange = ev => {
     setInput(ev.target.value); // target contains the input typed
   };
 
   const onSearch = () => {
-    // eslint-disable-next-line
-    console.log('clicked');
-    // fetch is used to fetch data from remote and it returns promise , so we use then and data is in raw format we convert it to json then simple console it
-    fetch(`https://api.tvmaze.com/search/shows?q=${ip}`)
-      .then(r => r.json())
-      .then(result => {
-        // eslint-disable-next-line
-        console.log(result);
-      });
+    apiGet(`/search/shows/?q=${ip}`).then(result => {
+      setResults(result);
+    });
   };
 
   // onkeydown is used if we type something and then hit enters it cals the onSearch fn
@@ -25,6 +21,22 @@ const Home = () => {
     if (ev.keyCode === 13) {
       onSearch();
     }
+  };
+
+  const resultRender = () => {
+    if (results && results.length === 0) {
+      return <div>No Results</div>;
+    }
+    if (results && results.length > 0) {
+      return (
+        <div>
+          {results.map(item => (
+            <div key={item.show.id}>{item.show.name}</div>
+          ))}
+        </div>
+      );
+    }
+    return null;
   };
 
   // on change detects if anything is changed in searchbar
@@ -39,6 +51,7 @@ const Home = () => {
       <button type="button" onClick={onSearch}>
         Search
       </button>
+      {resultRender()}
     </MainPageLayout>
   );
 };
