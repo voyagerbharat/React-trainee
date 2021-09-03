@@ -1,19 +1,19 @@
 /* eslint-disable no-unused-vars */
 import { Route, Switch } from 'react-router-dom';
 import React from 'react';
-import Navs from './Components/Navs';
+import Home from './pages/Home';
+import Starred from './pages/Starred';
 
 function App() {
   // we define various route pages inside switch and in each route page we add components we want to show in that route
   return (
     <div>
-      <Navs />
       <switch>
-        <Route exact path="/123">
-          hello
+        <Route exact path="/">
+          <Home />
         </Route>
         <Route exact path="/best">
-          Best Job
+          <Starred />
         </Route>
       </switch>
     </div>
