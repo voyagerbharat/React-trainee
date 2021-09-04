@@ -1,10 +1,11 @@
 import React from 'react';
 import ShowCard from './showCard';
 import IMAGE_NOT_FOUND from '../../images/not-found.png';
+import { FlexedGrid } from '../styled';
 
 const ShowGrid = ({ data }) => {
   return (
-    <div>
+    <FlexedGrid>
       {data.map(({ show }) => (
         <ShowCard
           key={show.id}
@@ -14,7 +15,7 @@ const ShowGrid = ({ data }) => {
           image={show.image ? show.image.medium : IMAGE_NOT_FOUND}
         />
       ))}
-    </div>
+    </FlexedGrid>
   );
 };
 
