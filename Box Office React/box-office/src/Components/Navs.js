@@ -4,7 +4,7 @@ import React from 'react';
 const navs = () => {
   const Links = [
     { to: '/', text: 'home' },
-    { to: '/best', text: 'best' },
+    { to: '/starred', text: 'starred' },
   ]; // array of links is created and then mapped to li , key prop is used to distinguish it uniquely
   return (
     <div>
