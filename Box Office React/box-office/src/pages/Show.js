@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router';
 import { apiGet } from '../misc/config';
 
@@ -9,12 +9,30 @@ import { apiGet } from '../misc/config';
 // useparams is a custom hook built on react hook ,
 //  params is used to finde params asigned after : in url , ex here is :i
 
-const Show = () => {
-  const [show, setShow] = useState(null);
-  const { id } = useParams();
-  const [Loading, isLoading] = useState(true);
-  const [error, setError] = useState(null);
+const reducer = (prevState, action) => {
+  switch (action.type) {
+    case 'FETCH_SUCCESS': {
+      return { Loading: false, error: null, show: action.show };
+    }
+    case 'FETCH_FAILED': {
+      return { ...prevState, Loading: false, error: action.error };
+    }
+    default:
+      return prevState;
+  }
+};
 
+const initialState = {
+  show: null,
+  Loading: true,
+  error: null,
+};
+
+const Show = () => {
+  const { id } = useParams();
+
+  const [state, dispatch] = useReducer(reducer, initialState); // returs array of 2 elements
+  console.log(state);
   // what if switch pages in between data is being loaded it would show some error
   // so we would use another varaiable which would keep a check on if data is unmounted or not
 
@@ -25,15 +43,14 @@ const Show = () => {
       .then(results => {
         setTimeout(() => {
           if (isMounted) {
-            isLoading(false);
-            setShow(results);
+            dispatch({ type: 'FETCH_SUCCESS', show: results });
           }
         }, 2000);
       })
       .catch(err => {
         if (isMounted) {
-          setError(err);
-          isLoading(false);
+          dispatch({ type: 'FETCH_FAILED', error: err.message });
+          console.log(err);
         }
       });
     return () => {
@@ -41,14 +58,14 @@ const Show = () => {
     };
   }, [id]);
 
-  console.log(show);
+  // console.log(show);
 
-  if (Loading) {
+  if (state.Loading) {
     return <div>Data is being Loaded</div>;
   }
-  if (error) {
-    return <div> there is some error : {error}</div>;
-  }
+  // if (error) {
+  //   return <div> there is some error : {error}</div>;
+  // }
 
   return <div>This is boom bro</div>;
 };
