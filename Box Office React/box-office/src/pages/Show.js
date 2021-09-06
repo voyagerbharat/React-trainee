@@ -1,5 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router';
+import Cast from '../Components/show/Cast';
+import Details from '../Components/show/Details';
+import Seasons from '../Components/show/Seasons';
+import ShowMainData from '../Components/show/ShowMainData';
 import { apiGet } from '../misc/config';
 
 // useEffect comes with a callback function and an array and this callback function is
@@ -31,8 +36,11 @@ const initialState = {
 const Show = () => {
   const { id } = useParams();
 
-  const [state, dispatch] = useReducer(reducer, initialState); // returs array of 2 elements
-  console.log(state);
+  const [{ show, Loading, error }, dispatch] = useReducer(
+    reducer,
+    initialState
+  ); // returs array of 2 elements
+
   // what if switch pages in between data is being loaded it would show some error
   // so we would use another varaiable which would keep a check on if data is unmounted or not
 
@@ -58,16 +66,40 @@ const Show = () => {
     };
   }, [id]);
 
-  // console.log(show);
-
-  if (state.Loading) {
+  if (Loading) {
     return <div>Data is being Loaded</div>;
   }
-  // if (error) {
-  //   return <div> there is some error : {error}</div>;
-  // }
+  if (error) {
+    return <div> there is some error : {error}</div>;
+  }
 
-  return <div>This is boom bro</div>;
+  return (
+    <div>
+      <ShowMainData
+        image={show.image}
+        name={show.name}
+        rating={show.rating}
+        summary={show.summary}
+        tags={show.genres}
+      />
+      <div>
+        <h2>Details</h2>
+        <Details
+          status={show.status}
+          network={show.network}
+          premiered={show.premiered}
+        />
+      </div>
+      <div>
+        <h2>seasons</h2>
+        <Seasons seasons={show._embedded.seasons} />
+      </div>
+      <div>
+        <h2>Cast</h2>
+        <Cast cast={show._embedded.cast} />
+      </div>
+    </div>
+  );
 };
 
 export default Show;
