@@ -3,6 +3,9 @@ body {
   font-size: 18px;
   margin: 0;
   padding-top: 40px;
+  background: url(https://b.rgbimg.com/users/x/xy/xymonau/600/o14tpzA.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .ok {
   text-align: center;
