@@ -10,7 +10,7 @@ const MainPageLayout = ({ children }) => {
         subtitle="Are you looking for Movie or an Actor?"
       />
       <Navs />
-      <div>{children}</div>
+      <div> {children} </div>{' '}
     </div>
   );
 };

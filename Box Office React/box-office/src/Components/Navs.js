@@ -1,22 +1,29 @@
-import { Link } from 'react-router-dom'; // used with router
 import React from 'react';
+import { useLocation } from 'react-router';
+import { LinkStyled, NavList } from './Nav.styled';
 
-const navs = () => {
-  const Links = [
-    { to: '/', text: 'home' },
-    { to: '/starred', text: 'starred' },
-  ]; // array of links is created and then mapped to li , key prop is used to distinguish it uniquely
+const Links = [
+  { to: '/', text: 'home' },
+  { to: '/starred', text: 'starred' },
+]; // array of links is created and then mapped to li , key prop is used to distinguish it uniquely
+const Navs = () => {
+  const Location = useLocation();
   return (
     <div>
-      <ul>
+      <NavList>
         {Links.map(item => (
           <li key={item.to}>
-            <Link to={item.to}>{item.text}</Link>
+            <LinkStyled
+              to={item.to}
+              className={item.to === Location.pathname ? 'active' : ''}
+            >
+              {item.text}
+            </LinkStyled>
           </li>
         ))}
-      </ul>
+      </NavList>
     </div>
   );
 };
 
-export default navs;
+export default Navs;
