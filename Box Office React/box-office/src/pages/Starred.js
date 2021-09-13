@@ -16,8 +16,10 @@ const Starred = () => {
       Promise.all(promises)
         .then(apiData => apiData.map(show => ({ show })))
         .then(results => {
-          SetShows(results);
-          setisLoading(false);
+          setTimeout(() => {
+            SetShows(results);
+            setisLoading(false);
+          }, 1000);
         })
         .catch(err => {
           setError(err.message);
@@ -30,9 +32,9 @@ const Starred = () => {
 
   return (
     <MainPageLayout>
-      {isLoading && <div>Data is being Loaded!</div>}
+      {isLoading && <div className="ok">Data is being Loaded!</div>}
       {error && <div>Error Occured</div>}
-      {!isLoading && !error && <div>No Starred Shows</div>}
+      {!isLoading && !error && !Shows && <div>No Starred Shows</div>}
       {!isLoading && !error && Shows && <ShowGrid data={Shows} />}
     </MainPageLayout>
   );
