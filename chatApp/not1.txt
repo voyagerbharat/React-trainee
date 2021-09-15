@@ -1,0 +1,19 @@
+Hey!
+
+ 
+
+A very quick note here!
+
+ 
+
+In chat app, node-sass can potentially produce an error: Node Sass version 5.0.0 is incompatible with ^4.0.0
+
+ 
+
+To fix it, you must downgrade node-sass to a compatible version. Please run the following command:
+
+npm i node-sass@4.14.1
+
+ 
+
+Keep it up! :)

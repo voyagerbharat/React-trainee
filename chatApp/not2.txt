@@ -1,0 +1,13 @@
+Hi!
+
+On August 25, 2021, Firebase has released a new version of v9.0.0 of the javascript library.
+
+That version contains MAJOR changes with new syntax, not the same as in the videos. To be able to use Firebase SDK without any problems and align with the course, in the next video please install the latest v8 version:
+
+npm install firebase@8.10.0
+
+----------------
+
+After you complete chat-app and then decide to update your code to use the latest v9 version, use this commit as a reference:
+
+https://github.com/shelooks16/chat-app/pull/4/commits/2fb3fb9891a01c80c716049dfe68c1724efac7fa?file-filters%5B%5D=.js

@@ -1,0 +1,15 @@
+Hey!
+
+In the next video, we will setup a new firebase project.
+
+At the time of creating the course, Firebase Realtime Database supported only United States location. In the videos, the location will be the US. However, when you create a new database, firebase will prompt you to select a region, please select either United States or Belgium. Recently Firebase introduced support for a new region Belgium (Europe-west1). Now it is possible to choose a region when creating a new instance of the Realtime Database.
+
+Feel free to choose the closest location but make sure that database URL matches URL in the config (see below):
+
+** If databaseURL is not present in the config, firebase will fallback to the US location.
+
+// misc/firebase.js const config = { // ... databaseURL: "URL_FROM_DASHBOARD" };
+
+ 
+
+Keep it up! :)
