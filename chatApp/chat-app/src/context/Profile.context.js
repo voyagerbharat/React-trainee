@@ -12,10 +12,11 @@ export const ProfileProvider = ({ children }) => {
       if (authObj) {
         UserRef = database.ref(`/profiles/${authObj.uid}`);
         UserRef.on('value', snap => {
-          const { name, createdAt } = snap.val();
+          const { name, createdAt, avatar } = snap.val();
           const data = {
             name,
             createdAt,
+            avatar,
             uid: authObj.uid,
             email: authObj.email,
           };
