@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Alert, Button, Modal } from 'rsuite';
 import AvatarEditor from 'react-avatar-editor';
 import { useModalState } from '../../misc/Custom-Hooks';
-import ProfileAvatar from './Avatar';
+import ProfileAvatar from '../Avatar';
 import { database, storage } from '../../misc/firebase';
 import { useProfile } from '../../context/Profile.context';
 
