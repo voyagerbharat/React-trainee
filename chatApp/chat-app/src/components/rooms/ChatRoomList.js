@@ -29,6 +29,7 @@ const chatRoomList = ({ aboveElHeight }) => {
           <Nav.Item
             componentClass={Link}
             eventKey={`/chats/${room.id}`}
+            key={room.id}
             to={`/chats/${room.id}`}
           >
             <RoomItem room={room} />
