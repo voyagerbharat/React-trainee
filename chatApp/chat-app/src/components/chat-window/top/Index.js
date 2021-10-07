@@ -11,7 +11,7 @@ const Top = () => {
   return (
     <div>
       <div className="d-flex justify-content-between align-itmes-center">
-        <h4>
+        <h4 className="text-disapper -flex align-items-center">
           <Icon
             componentClass={Link}
             to="/"
@@ -25,7 +25,7 @@ const Top = () => {
           />
           <span className="text-disappear">{name}</span>
         </h4>
-        <ButtonToolbar className="ws-nowrap">todo</ButtonToolbar>
+        <ButtonToolbar className="ws-nowrap mt-3">todo</ButtonToolbar>
       </div>
       <div className="d-flex justify-content-between alig-items-center">
         <span>todo</span>

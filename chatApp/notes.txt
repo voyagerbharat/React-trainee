@@ -1,0 +1,105 @@
+M5
+T1 at last
+
+Hi!
+
+In the next videos, we are going to setup FCM on the frontend. Firebase is growing and always evolves. For that reason, if you have firebase sdk v8.0.0 or higher installed, you can encounter a few deprecation warnings when writing code for Firebase Cloud Messaging while going along with the videos. That is OK. After the course was published, new changes to firebase SDK were introduced and a few changes must be made to use up-to-date code. Please follow the videos till the end and only afterwards update the code.
+
+ 
+
+Please take a look at what changes must be made by viewing this commit. Click Here
+
+ 
+
+ 
+
+Keep it up! 
+
+T3 at last 
+NOTE:
+In this course, we provided a very basic security rules setup for a firebase app. If you plan to use firebase database in the future apps, always make sure you write good security rules. They control not only access permission, but also data validation (i.e age can only be a number, not a string). This is pretty common to have a large object for security rules and trust me this is totally fine :) Always remember to keep private data private and you will be just fine.
+
+Please use the link below to reference information on how to write extensive security rules:
+
+https://firebase.google.cn/docs/reference/security/database
+
+
+
+P.S.
+
+In our final version of security rules for chat app there is one rule we missed to add. Let's explore.
+
+If a regular user wants to add/remove himself to FCM subscribers list (i.e. clicks on 'Yes, I want to receive notifications'), he will get permission_denied because we set that only the admin of the room can write to room's database location:
+
+"$room_id": {
+".write": "!data.exists() || data.child('admins').child(auth.uid).val() == true"
+}
+
+
+Non-admin users will fail to write to roomData.fcmUsers. To prevent that, we can control access to "fcmUsers" field in the same way as we do for "lastMessage", so let's add the next:
+
+"$room_id": {
+".read": "auth !== null",
+".write": "!data.exists() || data.child('admins').child(auth.uid).val() == true",
+"fcmUsers": {
+"$user_id": {
+".write": "$user_id === auth.uid"
+}
+},
+"lastMessage": {
+".write": "auth !== null"
+}
+}
+Now any user that tries to edit "fcmUsers" location can only add/remove his own user id from the object (fcmUsers is an [uid]:boolean object inside the database, but we refer to this object as if it was an array. That makes it easier to access and protect data).
+
+Final database.rules.json:
+
+{
+"rules": {
+"profiles": {
+"$user_id": {
+".read": "$user_id === auth.uid",
+".write": "$user_id === auth.uid"
+}
+},
+"rooms": {
+".read": "auth !== null",
+"$room_id": {
+".read": "auth !== null",
+".write": "!data.exists() || data.child('admins').child(auth.uid).val() == true",
+"fcmUsers": {
+"$user_id": {
+".write": "$user_id === auth.uid"
+}
+},
+"lastMessage": {
+".write": "auth !== null"
+}
+}
+},
+"messages": {
+".read": "auth !== null",
+".write": "auth !== null",
+".indexOn": "roomId",
+"$message_id": {
+".read": "auth !== null",
+".write": "auth !== null"
+}
+},
+"status": {
+"$user_id": {
+".read": "auth !== null",
+".write": "$user_id === auth.uid"
+}
+},
+"fcm_tokens": {
+".indexOn": ".value",
+"$token_id": {
+".read": false,
+".write": "newData.val() === auth.uid"
+}
+},
+".read": false,
+".write": false
+}
+}

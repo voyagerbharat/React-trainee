@@ -2,6 +2,7 @@ import React from 'react';
 import { Drawer, Button, Divider, Alert } from 'rsuite';
 import { useProfile } from '../../context/Profile.context';
 import { database } from '../../misc/firebase';
+import { getUserUpdates } from '../../misc/helper';
 import EditableInput from '../EditableInput';
 import AvatarUploadbtn from './AvatarUploadbtn';
 import ProviderBlock from './ProviderBlock';
@@ -10,16 +11,20 @@ const Dashboard = ({ onSignOut }) => {
   const { profile } = useProfile();
   // eslint-disable-next-line no-unused-vars
   const onSave = async newData => {
-    const userNicknameRef = database
-      .ref(`/profiles/${profile.uid}`)
-      .child('name');
     try {
-      userNicknameRef.set(newData);
+      const updates = await getUserUpdates(
+        profile.uid,
+        'name',
+        newData,
+        database
+      );
+
+      database.ref().update(updates);
+
       Alert.info('Successfully Updated!', 4000);
     } catch (err) {
       Alert.error(err, 4000);
     }
-    console.log(newData);
   };
   return (
     <>

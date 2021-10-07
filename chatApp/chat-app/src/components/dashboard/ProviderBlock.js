@@ -14,7 +14,6 @@ const ProviderBlock = () => {
       data => data.providerId === 'facebook.com'
     ),
   });
-  console.log(auth.currentUser);
 
   const UpdateIsConnected = (providerId, value) => {
     setisConnected(p => {
