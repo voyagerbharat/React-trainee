@@ -2,12 +2,14 @@ import React from 'react';
 import Timeago from 'timeago-react';
 import { Avatar } from 'rsuite';
 import ProfileInfoBtnModel from './ProfileInfoBtnModel';
+import PresenceDot from '../../Presencedot';
 
 const MessageItem = ({ message }) => {
   const { author, createdAt, text } = message;
   return (
     <li className="padded mb-1">
       <div className="d-flex align-items-center font-bolder mb-1">
+        <PresenceDot uid={author.uid} />
         <Avatar
           src={author.avatar}
           name={author.name}
