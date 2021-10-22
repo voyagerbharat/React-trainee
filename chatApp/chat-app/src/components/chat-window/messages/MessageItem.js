@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import React, { memo } from 'react';
 import Timeago from 'timeago-react';
 import { Avatar, Button } from 'rsuite';
@@ -5,6 +6,7 @@ import ProfileInfoBtnModel from './ProfileInfoBtnModel';
 import PresenceDot from '../../Presencedot';
 import { useCurrentRoom } from '../../../context/current-room-context';
 import { auth } from '../../../misc/firebase';
+import IconBtnControl from './IconBtnControl';
 
 const MessageItem = ({ message, handleAdmin }) => {
   const { author, createdAt, text } = message;
@@ -42,6 +44,14 @@ const MessageItem = ({ message, handleAdmin }) => {
         <Timeago
           datetime={createdAt}
           className="font-normal text-black-45 ml-2"
+        />
+        <IconBtnControl
+          {...(true ? { color: 'red' } : {})}
+          isVisible
+          iconName="heart"
+          tooltip="Like this message"
+          onClick={() => {}}
+          badgeContent={5}
         />
       </div>
       <div>
