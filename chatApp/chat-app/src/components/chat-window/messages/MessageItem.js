@@ -1,13 +1,12 @@
-/* eslint-disable no-constant-condition */
 import React, { memo } from 'react';
-import Timeago from 'timeago-react';
+import TimeAgo from 'timeago-react';
 import { Avatar, Button } from 'rsuite';
-import ProfileInfoBtnModel from './ProfileInfoBtnModel';
 import PresenceDot from '../../Presencedot';
+import ProfileInfoBtnModel from './ProfileInfoBtnModel';
 import { useCurrentRoom } from '../../../context/current-room-context';
 import { auth } from '../../../misc/firebase';
-import IconBtnControl from './IconBtnControl';
 import { useHover, useMediaQuery } from '../../../misc/Custom-Hooks';
+import IconBtnControl from './IconBtnControl';
 import ImgBtnModal from './ImgBtnModal';
 
 const renderFileMessage = file => {
@@ -18,6 +17,17 @@ const renderFileMessage = file => {
       </div>
     );
   }
+
+  if (file.contentType.includes('audio')) {
+    return (
+      // eslint-disable-next-line jsx-a11y/media-has-caption
+      <audio controls>
+        <source src={file.url} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    );
+  }
+
   return <a href={file.url}>Download {file.name}</a>;
 };
 
@@ -25,17 +35,16 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
   const { author, createdAt, text, file, likes, likeCount } = message;
 
   const [selfRef, isHovered] = useHover();
-  const isMobile = useMediaQuery('(max-width:992px)');
+  const isMobile = useMediaQuery('(max-width: 992px)');
 
   const isAdmin = useCurrentRoom(v => v.isAdmin);
   const admins = useCurrentRoom(v => v.admins);
-
-  const canShowIcon = isMobile || isHovered;
 
   const isMsgAuthorAdmin = admins.includes(author.uid);
   const isAuthor = auth.currentUser.uid === author.uid;
   const canGrantAdmin = isAdmin && !isAuthor;
 
+  const canShowIcons = isMobile || isHovered;
   const isLiked = likes && Object.keys(likes).includes(auth.currentUser.uid);
 
   return (
@@ -45,12 +54,14 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
     >
       <div className="d-flex align-items-center font-bolder mb-1">
         <PresenceDot uid={author.uid} />
+
         <Avatar
           src={author.avatar}
           name={author.name}
           className="ml-1"
           size="xs"
         />
+
         <ProfileInfoBtnModel
           profile={author}
           appearance="link"
@@ -64,13 +75,14 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
             </Button>
           )}
         </ProfileInfoBtnModel>
-        <Timeago
+        <TimeAgo
           datetime={createdAt}
           className="font-normal text-black-45 ml-2"
         />
+
         <IconBtnControl
           {...(isLiked ? { color: 'red' } : {})}
-          isVisible={canShowIcon}
+          isVisible={canShowIcons}
           iconName="heart"
           tooltip="Like this message"
           onClick={() => handleLike(message.id)}
@@ -78,13 +90,14 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
         />
         {isAuthor && (
           <IconBtnControl
-            isVisible={canShowIcon}
+            isVisible={canShowIcons}
             iconName="close"
             tooltip="Delete this message"
-            onClick={() => handleDelete(message.id)}
+            onClick={() => handleDelete(message.id, file)}
           />
         )}
       </div>
+
       <div>
         {text && <span className="word-breal-all">{text}</span>}
         {file && renderFileMessage(file)}
