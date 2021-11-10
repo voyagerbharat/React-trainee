@@ -32,7 +32,7 @@ const renderFileMessage = file => {
 };
 
 const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
-  const { author, createdAt, text, file, likes, likeCount } = message;
+  const { author, createAt, text, file, likes, likeCount } = message;
 
   const [selfRef, isHovered] = useHover();
   const isMobile = useMediaQuery('(max-width: 992px)');
@@ -76,7 +76,7 @@ const MessageItem = ({ message, handleAdmin, handleLike, handleDelete }) => {
           )}
         </ProfileInfoBtnModel>
         <TimeAgo
-          datetime={createdAt}
+          datetime={createAt}
           className="font-normal text-black-45 ml-2"
         />
 

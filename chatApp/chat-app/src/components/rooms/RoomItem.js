@@ -3,14 +3,14 @@ import Timeago from 'timeago-react';
 import ProfileAvatar from '../Avatar';
 
 const RoomItem = ({ room }) => {
-  const { createdAt, name, lastMessage } = room;
+  const { createAt, name, lastMessage } = room;
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center">
         <h3 className="text-disappear">{name}</h3>
         <Timeago
           datetime={
-            lastMessage ? new Date(lastMessage.createdAt) : new Date(createdAt)
+            lastMessage ? new Date(lastMessage.createAt) : new Date(createAt)
           }
           className="font-normal text-black-45"
         />
